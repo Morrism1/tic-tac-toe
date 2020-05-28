@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
-puts 'Hello World!'
+puts "1 | 2 | 3"
+puts "---------"
+puts "4 | 5 | 6"
+puts "---------"
+puts "7 | 8 | 9"
+
+puts "\nPlayer 1 (X), insert your name:"
+player_1 = gets.chomp
+
+puts "\nPlayer 2 (O), insert your name:"
+player_2 = gets.chomp
+
+puts "\n#{player_1} make your move"
+gets.chomp
+
+puts "now we will verify your selection"
+#the player needs to select cell from 1 to 9, and that cell needs to be a free space.
+#if the move was valid the board will be modified, if not player 1 will be requested to select another cell
+
+puts "Your move has been displayed in the board"
+#we need to check if the game has been defined as a tie or anyone won,if not it's player 2 turn.
+
+puts "\n#{player_2} make your move"
+gets.chomp
+puts "now we will verify your selection"
+puts "Your move has been displayed in the board"
+#the game will loop until it is defined
+
+puts "\nCongrats #{player_2} you won!"

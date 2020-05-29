@@ -35,7 +35,7 @@ while game_on == false
 
     puts 'Make your move'
   end
-  current_player += 1
+  current_player =+ 1
 
   # check for a Winner or A tie
 

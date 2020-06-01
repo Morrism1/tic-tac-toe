@@ -12,35 +12,42 @@ player_one = gets.chomp
 puts "\nPlayer 2 (O), insert your name:"
 player_two = gets.chomp 
 
-puts "\n#{player_1} make your move"
+puts "\n#{player_one} make your move"
 gets.chomp
 
 game_on = false
 # initial instructions for player
 current_player = nil
+player_move = 0
 
 while game_on == false
   # telling player 1 to play
-  if player_one
-    current_player = player_one.to_s
-    gets.chomp
+  if player_move.odd?
+    puts "#{player_one} make a move"
+    player_move = gets.chomp
+    player_move.to_s
 
     puts 'Make your move'
     # check the move is valid
 
     # tell player 2 to play
-  elsif player_two
-    current_player = player_two.to_s
-    gets.chomp
-
+  elsif player_move.even?
+    puts "#{player_two} make a move"
+    player_move = gets.chomp
+    player_move.to_s
     puts 'Make your move'
   end
 
   # check for a Winner or A tie
+  game_on = true 
+
+  #to stop the loop the game will be true to get the winner or a tie
 
   puts ' It was a tie'
   puts "#{player_one} Won"
   puts "#{player_two} Won"
+
+  player_move =+ 1
 
 end
 

@@ -7,55 +7,41 @@ puts '---------'
 puts '7 | 8 | 9'
 
 puts "\nPlayer 1 (X), insert your name:"
-player_1 = gets.chomp # rubocop:todo Naming/VariableNumber
+player_one = gets.chomp 
 
 puts "\nPlayer 2 (O), insert your name:"
-player_2 = gets.chomp # rubocop:todo Naming/VariableNumber
+player_two = gets.chomp 
 
 puts "\n#{player_1} make your move"
 gets.chomp
 
 game_on = false
 # initial instructions for player
-current_player = 1
+current_player = nil
 
 while game_on == false
   # telling player 1 to play
-  if player_1
-    current_player = player_1.to_s
+  if player_one
+    current_player = player_one.to_s
     gets.chomp
 
     puts 'Make your move'
     # check the move is valid
 
     # tell player 2 to play
-  elsif player_2
-    current_player = player_2.to_s
+  elsif player_two
+    current_player = player_two.to_s
     gets.chomp
 
     puts 'Make your move'
   end
-  current_player =+ 1
 
   # check for a Winner or A tie
 
   puts ' It was a tie'
-  puts "#{player_1} Won"
-  puts "#{player_2} Won"
+  puts "#{player_one} Won"
+  puts "#{player_two} Won"
 
 end
 
-puts 'now we will verify your selection'
-# the player needs to select cell from 1 to 9, and that cell needs to be a free space.
-# if the move was valid the board will be modified, if not player 1 will be requested to select another cell
-
-puts 'Your move has been displayed in the board'
-# we need to check if the game has been defined as a tie or anyone won,if not it's player 2 turn.
-
-puts "\n#{player_2} make your move"
-gets.chomp
-puts 'now we will verify your selection'
-puts 'Your move has been displayed in the board'
-# the game will loop until it is defined
-
-puts "\nCongrats #{player_2} you won!"
+puts "\nCongrats #{player_two} you won!"

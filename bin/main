@@ -25,6 +25,7 @@ while game_on == false
     player_move.to_s
     # check the move is valid
     # if the move was valid the board will be changed
+    # Display board with updated data
 
     # tell player 2 to play
   elsif player_move.even?
@@ -33,6 +34,8 @@ while game_on == false
     player_move.to_s
     # check the move is valid
     # if the move was valid the board will be changed
+    # Display board with updated data
+
   end
 
 

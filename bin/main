@@ -1,3 +1,56 @@
 #!/usr/bin/env ruby
 
-puts 'Hello World!'
+puts '1 | 2 | 3'
+puts '---------'
+puts '4 | 5 | 6'
+puts '---------'
+puts '7 | 8 | 9'
+
+puts "\nPlayer 1 (X), insert your name:"
+player_one = gets.chomp
+
+puts "\nPlayer 2 (O), insert your name:"
+player_two = gets.chomp
+
+puts "\n#{player_one} make your move"
+gets.chomp
+
+game_on = false
+# initial instructions for player
+player_move = 0
+while game_on == false
+  # telling player 1 to play
+  if player_move.odd?
+    player_move = gets.chomp
+    player_move.to_s
+    # check the move is valid
+    # if the move was valid the board will be changed
+    # Display board with updated data
+
+    # tell player 2 to play
+  elsif player_move.even?
+    puts "#{player_two} make a move"
+    player_move = gets.chomp
+    player_move.to_s
+    # check the move is valid
+    # if the move was valid the board will be changed
+    # Display board with updated data
+
+  end
+
+
+  game_on = true
+  #if the board has ben filled up and there is no match for a winning combination
+  #if any player matches a wining combination
+
+  # to stop the loop the game will be true to get the winner or a tie
+
+  puts ' It was a tie'
+  puts "#{player_one} Won"
+  puts "#{player_two} Won"
+
+  player_move = + 1
+
+end
+
+puts "\nCongrats #{player_two} you won!"

@@ -31,6 +31,11 @@ puts ""
 Board.display_board(new_board)
 
 puts "\n#{player_one} make your move"
+player_one_selection = gets.chomp
+player_one_to_i = player_one_selection.to_i
+player_one_move = player_one_to_i - 1
+new_board.insert(player_one_move,player_one_symbol)
+Board.display_board(new_board)
 
 
 

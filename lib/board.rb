@@ -14,6 +14,10 @@ class Board
         puts "#{board[6]} | #{board[7]} | #{board[8]}"
     end
 
-    def player_move
+    def self.player_move(player_selection)
+        player_selection = gets.chomp
+        player_selection_to_i = player_selection.to_i
+        player_move = player_selection_to_i - 1
+        return player_move
     end
 end

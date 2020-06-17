@@ -5,36 +5,59 @@ require_relative "../lib/user.rb"
 
 require "pry"
 
-puts "Welcome to the Tic-Tac-Toe game\n"
+puts "Welcome to the Tic-Tac-Toe game"
 
-puts "Player one enter your name:"
+puts "\nPlayer one enter your name:"
 
 player_one = User.get_user_name("one")
+puts ""
 player_one_symbol = User.get_user_symbol(player_one)
-
+puts ""
 puts "Player two enter your name:"
 
 player_two = User.get_user_name("two")
+puts ""
 player_two_symbol = User.get_user_symbol(player_two)
-binding.pry
+puts ""
 
 playing = true
 new_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+puts ""
+Board.display_board(new_board)
+
 # while playing
+turn_over = false
+
+while turn_over == false
+    puts "\n#{player_one} make a valid move:"
+    player_one_move = Board.player_move(player_one)
+    if Logic.valid_move?(player_one_move, new_board)
+        new_board.insert(player_one_move,player_one_symbol)
+        turn_over = true
+    else
+        turn_over = false
+    end
+end
 
 puts ""
 Board.display_board(new_board)
 
-puts "\n#{player_one} make your move"
-player_one_selection = gets.chomp
-player_one_to_i = player_one_selection.to_i
-player_one_move = player_one_to_i - 1
-new_board.insert(player_one_move,player_one_symbol)
+turn_over = false
+
+while turn_over == false
+    puts "\n#{player_two} make a valid move:"
+    player_two_move = Board.player_move(player_two)
+    if Logic.valid_move?(player_two_move, new_board)
+        new_board.insert(player_two_move,player_two_symbol)
+        turn_over = true
+    else
+        turn_over = false
+    end
+end
+
+puts ""
 Board.display_board(new_board)
-
-
-
 
 # end
 

@@ -15,13 +15,15 @@ class User
         name
     end
 
-    def self.get_user_symbol(number)
+    def self.get_user_symbol(player, other_player_mark)
         symbol = ""
         while symbol.empty?
-            puts "#{number} select a valid (a-z) mark:"
+            puts "#{player} select a valid (a-z) mark:"
             symbol = gets.chomp
             if  symbol =~ /[a-z]/
                 if symbol.length > 1
+                    symbol = ""
+                elsif symbol == other_player_mark
                     symbol = ""
                 else
                     return symbol

@@ -11,13 +11,13 @@ puts "\nPlayer one enter your name:"
 
 player_one = User.get_user_name("one")
 puts ""
-player_one_symbol = User.get_user_symbol(player_one)
+player_one_symbol = User.get_user_symbol(player_one, nil)
 puts ""
 puts "Player two enter your name:"
 
 player_two = User.get_user_name("two")
 puts ""
-player_two_symbol = User.get_user_symbol(player_two)
+player_two_symbol = User.get_user_symbol(player_two, player_one_symbol)
 puts ""
 
 playing = true
@@ -33,7 +33,7 @@ while turn_over == false
     puts "\n#{player_one} make a valid move:"
     player_one_move = Board.player_move(player_one)
     if Logic.valid_move?(player_one_move, new_board)
-        new_board.insert(player_one_move,player_one_symbol)
+        new_board[player_one_move] = player_one_symbol
         turn_over = true
     else
         turn_over = false
@@ -49,7 +49,7 @@ while turn_over == false
     puts "\n#{player_two} make a valid move:"
     player_two_move = Board.player_move(player_two)
     if Logic.valid_move?(player_two_move, new_board)
-        new_board.insert(player_two_move,player_two_symbol)
+        new_board[player_two_move] = player_two_symbol
         turn_over = true
     else
         turn_over = false

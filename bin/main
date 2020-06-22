@@ -73,6 +73,22 @@ while start_over == true
   puts '---------'
   puts "#{board[6]} | #{board[7]} | #{board[8]}"
 
+  def self.player_move(player_selection)
+    player_selection = ''
+    while player_selection.empty?
+      player_selection = gets.chomp
+      if player_selection =~ /[1-9]/
+        player_selection
+      else
+        puts 'select a valid move!'
+        player_selection = ''
+      end
+    end
+    player_selection_to_i = player_selection.to_i
+    player_move = player_selection_to_i - 1
+    player_move
+  end
+
   while playing == true
 
     turn_over = false
@@ -80,7 +96,7 @@ while start_over == true
 
     while turn_over == false
       puts "\n#{player_one} make a valid move:"
-      player_one_move = Board.player_move(player_one)
+      player_one_move = player_move(player_one)
       if Logic.valid_cell?(player_one_move, board) && Logic.empty_cell?(player_one_move, board)
         board[player_one_move] = player_one_symbol
         turn_over = true
@@ -111,7 +127,7 @@ while start_over == true
     turn_counter += 1
     while turn_over == false
       puts "\n#{player_two} make a valid move:"
-      player_two_move = Board.player_move(player_two)
+      player_two_move = player_move(player_two)
       if Logic.valid_cell?(player_two_move, board) && Logic.empty_cell?(player_two_move, board)
         board[player_two_move] = player_two_symbol
         turn_over = true

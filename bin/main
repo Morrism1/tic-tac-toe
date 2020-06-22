@@ -1,164 +1,159 @@
 #!/usr/bin/env ruby
-require_relative "../lib/validation.rb"
-require_relative "../lib/board.rb"
+require_relative '../lib/validation.rb'
+require_relative '../lib/board.rb'
 
-require "pry"
+require 'pry'
 
-puts "Welcome to the Tic-Tac-Toe game"
+puts 'Welcome to the Tic-Tac-Toe game'
 
 puts "\nPlayer one enter your name:"
 
 player_one = gets.chomp
 while player_one.empty?
-    puts "Player one please enter your name:"
-    player_one = gets.chomp
+  puts 'Player one please enter your name:'
+  player_one = gets.chomp
 end
 
-puts ""
+puts ''
 
-player_one_symbol = ""
+player_one_symbol = ''
 while player_one_symbol.empty?
-    puts "#{player_one} select a valid (a-z) mark:"
-    player_one_symbol = gets.chomp
-    if  player_one_symbol =~ /[a-z]/
-        if player_one_symbol.length > 1
-            player_one_symbol = ""
-        else
-            player_one_symbol
-        end
+  puts "#{player_one} select a valid (a-z) mark:"
+  player_one_symbol = gets.chomp
+  if player_one_symbol =~ /[a-z]/
+    if player_one_symbol.length > 1
+      player_one_symbol = ''
     else
-        player_one_symbol = ""
+      player_one_symbol
     end
+  else
+    player_one_symbol = ''
+  end
 end
 
 puts "\nPlayer two enter your name:"
 
 player_two = gets.chomp
 while player_two.empty?
-    puts "Player two please enter your name:"
-    player_two = gets.chomp
+  puts 'Player two please enter your name:'
+  player_two = gets.chomp
 end
 
-puts ""
+puts ''
 
-player_two_symbol = ""
+player_two_symbol = ''
 while player_two_symbol.empty?
-    puts "#{player_two} select a valid (a-z) mark:"
-    player_two_symbol = gets.chomp
-    if  player_two_symbol =~ /[a-z]/
-        if player_two_symbol.length > 1
-            player_two_symbol = ""
-        elsif player_two_symbol == player_one_symbol
-            player_two_symbol = ""
-        else
-            player_two_symbol
-        end
+  puts "#{player_two} select a valid (a-z) mark:"
+  player_two_symbol = gets.chomp
+  if player_two_symbol =~ /[a-z]/
+    if player_two_symbol.length > 1
+      player_two_symbol = ''
+    elsif player_two_symbol == player_one_symbol
+      player_two_symbol = ''
     else
-        player_two_symbol = ""
+      player_two_symbol
     end
+  else
+    player_two_symbol = ''
+  end
 end
 
-puts ""
+puts ''
 
 start_over = true
 while start_over == true
-    playing = true
-    board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    turn_counter = 0
+  playing = true
+  board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  turn_counter = 0
 
-    puts ""
+  puts ''
+  puts "#{board[0]} | #{board[1]} | #{board[2]}"
+  puts '---------'
+  puts "#{board[3]} | #{board[4]} | #{board[5]}"
+  puts '---------'
+  puts "#{board[6]} | #{board[7]} | #{board[8]}"
+
+  while playing == true
+
+    turn_over = false
+    turn_counter += 1
+
+    while turn_over == false
+      puts "\n#{player_one} make a valid move:"
+      player_one_move = Board.player_move(player_one)
+      if Logic.valid_cell?(player_one_move, board) && Logic.empty_cell?(player_one_move, board)
+        board[player_one_move] = player_one_symbol
+        turn_over = true
+      else
+        player_one_move = ''
+        turn_over = false
+      end
+    end
+
+    puts ''
     puts "#{board[0]} | #{board[1]} | #{board[2]}"
     puts '---------'
     puts "#{board[3]} | #{board[4]} | #{board[5]}"
     puts '---------'
     puts "#{board[6]} | #{board[7]} | #{board[8]}"
 
-    while playing == true
-
-        turn_over = false
-        turn_counter += 1
-        
-        while turn_over == false
-            puts "\n#{player_one} make a valid move:"
-            player_one_move = Board.player_move(player_one)
-            if Logic.valid_cell?(player_one_move, board) && Logic.empty_cell?(player_one_move, board)
-                board[player_one_move] = player_one_symbol
-                turn_over = true
-            else
-                player_one_move = ""
-                turn_over = false
-            end
-        end
-
-        puts ""
-        puts "#{board[0]} | #{board[1]} | #{board[2]}"
-        puts '---------'
-        puts "#{board[3]} | #{board[4]} | #{board[5]}"
-        puts '---------'
-        puts "#{board[6]} | #{board[7]} | #{board[8]}"
-        
-        if turn_counter == 9
-            playing = false
-            break
-        end
-
-        if Logic.game_defined?(board)
-            playing = false
-            break
-        end
-
-
-
-
-        turn_over = false
-        turn_counter += 1
-        while turn_over == false
-            puts "\n#{player_two} make a valid move:"
-            player_two_move = Board.player_move(player_two)
-            if Logic.valid_cell?(player_two_move, board) && Logic.empty_cell?(player_two_move, board)
-                board[player_two_move] = player_two_symbol
-                turn_over = true
-            else
-                turn_over = false
-            end
-        end
-
-        puts ""
-        puts "#{board[0]} | #{board[1]} | #{board[2]}"
-        puts '---------'
-        puts "#{board[3]} | #{board[4]} | #{board[5]}"
-        puts '---------'
-        puts "#{board[6]} | #{board[7]} | #{board[8]}"
-
-        
-        if Logic.game_defined?(board)
-            playing = false
-            break
-        end
-
-    end
-
-    puts ""
-
     if turn_counter == 9
-        puts "It's a draw!"
-    elsif turn_counter.odd?
-        puts "Congratulations #{player_one} you won!"
-    elsif turn_counter.even?
-        puts "Congratulations #{player_two} you won!"
+      playing = false
+      break
     end
 
-
-    start_again = ""
-    while start_again != "yes" || start_again != "no"
-        puts "\nDo you want to play again? (yes/no)"
-        start_again = gets.chomp
-        if start_again == "yes"
-            break
-        elsif start_again == "no"
-            puts "\nThanks for playing, see you!"
-            start_over = false
-            return start_over
-        end
+    if Logic.game_defined?(board)
+      playing = false
+      break
     end
+
+    turn_over = false
+    turn_counter += 1
+    while turn_over == false
+      puts "\n#{player_two} make a valid move:"
+      player_two_move = Board.player_move(player_two)
+      if Logic.valid_cell?(player_two_move, board) && Logic.empty_cell?(player_two_move, board)
+        board[player_two_move] = player_two_symbol
+        turn_over = true
+      else
+        turn_over = false
+      end
+    end
+
+    puts ''
+    puts "#{board[0]} | #{board[1]} | #{board[2]}"
+    puts '---------'
+    puts "#{board[3]} | #{board[4]} | #{board[5]}"
+    puts '---------'
+    puts "#{board[6]} | #{board[7]} | #{board[8]}"
+
+    if Logic.game_defined?(board)
+      playing = false
+      break
+    end
+
+  end
+
+  puts ''
+
+  if turn_counter == 9
+    puts "It's a draw!"
+  elsif turn_counter.odd?
+    puts "Congratulations #{player_one} you won!"
+  elsif turn_counter.even?
+    puts "Congratulations #{player_two} you won!"
+  end
+
+  start_again = ''
+  while start_again != 'yes' || start_again != 'no'
+    puts "\nDo you want to play again? (yes/no)"
+    start_again = gets.chomp
+    if start_again == 'yes'
+      break
+    elsif start_again == 'no'
+      puts "\nThanks for playing, see you!"
+      start_over = false
+      return start_over
+    end
+  end
 end

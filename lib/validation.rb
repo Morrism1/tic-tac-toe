@@ -1,8 +1,19 @@
 require_relative "./board.rb"
 class Logic
 
-    def self.valid_move?(player_move, board)
-        if board[player_move].to_i.between?(1, 10)
+    def self.valid_cell?(player_move, board)
+        case player_move
+        when 0..8
+            return true
+        else
+            return false
+        end
+    end
+
+    def self.empty_cell?(player_move, board)
+        board_data = board[player_move] 
+        case board_data
+        when 1..9
             return true
         else
             return false
@@ -30,20 +41,4 @@ class Logic
             return false
         end
     end
-
-    def self.draw?(board)
-        # board.each do |n|
-        #     if n.to_i.between?(1, 10)
-        #         return false
-        #     else
-        #         return true
-        #     end
-        # end
-        if board =~ /[1-9]/
-            return false
-        else
-            return true
-        end
-    end
-
 end

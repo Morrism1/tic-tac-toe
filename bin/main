@@ -34,13 +34,15 @@ while start_over == true
 
         turn_over = false
         turn_counter += 1
+        
         while turn_over == false
             puts "\n#{player_one} make a valid move:"
             player_one_move = Board.player_move(player_one)
-            if Logic.valid_move?(player_one_move, new_board)
+            if Logic.valid_cell?(player_one_move, new_board) && Logic.empty_cell?(player_one_move, new_board)
                 new_board[player_one_move] = player_one_symbol
                 turn_over = true
             else
+                player_one_move = ""
                 turn_over = false
             end
         end
@@ -66,7 +68,7 @@ while start_over == true
         while turn_over == false
             puts "\n#{player_two} make a valid move:"
             player_two_move = Board.player_move(player_two)
-            if Logic.valid_move?(player_two_move, new_board)
+            if Logic.valid_cell?(player_two_move, new_board) && Logic.empty_cell?(player_two_move, new_board)
                 new_board[player_two_move] = player_two_symbol
                 turn_over = true
             else

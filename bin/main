@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require_relative "../lib/validation.rb"
 require_relative "../lib/board.rb"
-require_relative "../lib/user.rb"
 
 require "pry"
 
@@ -9,26 +8,70 @@ puts "Welcome to the Tic-Tac-Toe game"
 
 puts "\nPlayer one enter your name:"
 
-player_one = User.get_user_name("one")
-puts ""
-player_one_symbol = User.get_user_symbol(player_one, nil)
-puts ""
-puts "Player two enter your name:"
+player_one = gets.chomp
+while player_one.empty?
+    puts "Player one please enter your name:"
+    player_one = gets.chomp
+end
 
-player_two = User.get_user_name("two")
-puts ""
-player_two_symbol = User.get_user_symbol(player_two, player_one_symbol)
 puts ""
 
+player_one_symbol = ""
+while player_one_symbol.empty?
+    puts "#{player_one} select a valid (a-z) mark:"
+    player_one_symbol = gets.chomp
+    if  player_one_symbol =~ /[a-z]/
+        if player_one_symbol.length > 1
+            player_one_symbol = ""
+        else
+            player_one_symbol
+        end
+    else
+        player_one_symbol = ""
+    end
+end
+
+puts "\nPlayer two enter your name:"
+
+player_two = gets.chomp
+while player_two.empty?
+    puts "Player two please enter your name:"
+    player_two = gets.chomp
+end
+
+puts ""
+
+player_two_symbol = ""
+while player_two_symbol.empty?
+    puts "#{player_two} select a valid (a-z) mark:"
+    player_two_symbol = gets.chomp
+    if  player_two_symbol =~ /[a-z]/
+        if player_two_symbol.length > 1
+            player_two_symbol = ""
+        elsif player_two_symbol == player_one_symbol
+            player_two_symbol = ""
+        else
+            player_two_symbol
+        end
+    else
+        player_two_symbol = ""
+    end
+end
+
+puts ""
 
 start_over = true
 while start_over == true
     playing = true
-    new_board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     turn_counter = 0
 
     puts ""
-    Board.display_board(new_board)
+    puts "#{board[0]} | #{board[1]} | #{board[2]}"
+    puts '---------'
+    puts "#{board[3]} | #{board[4]} | #{board[5]}"
+    puts '---------'
+    puts "#{board[6]} | #{board[7]} | #{board[8]}"
 
     while playing == true
 
@@ -38,8 +81,8 @@ while start_over == true
         while turn_over == false
             puts "\n#{player_one} make a valid move:"
             player_one_move = Board.player_move(player_one)
-            if Logic.valid_cell?(player_one_move, new_board) && Logic.empty_cell?(player_one_move, new_board)
-                new_board[player_one_move] = player_one_symbol
+            if Logic.valid_cell?(player_one_move, board) && Logic.empty_cell?(player_one_move, board)
+                board[player_one_move] = player_one_symbol
                 turn_over = true
             else
                 player_one_move = ""
@@ -48,14 +91,18 @@ while start_over == true
         end
 
         puts ""
-        Board.display_board(new_board)
+        puts "#{board[0]} | #{board[1]} | #{board[2]}"
+        puts '---------'
+        puts "#{board[3]} | #{board[4]} | #{board[5]}"
+        puts '---------'
+        puts "#{board[6]} | #{board[7]} | #{board[8]}"
         
         if turn_counter == 9
             playing = false
             break
         end
 
-        if Logic.game_defined?(new_board)
+        if Logic.game_defined?(board)
             playing = false
             break
         end
@@ -68,8 +115,8 @@ while start_over == true
         while turn_over == false
             puts "\n#{player_two} make a valid move:"
             player_two_move = Board.player_move(player_two)
-            if Logic.valid_cell?(player_two_move, new_board) && Logic.empty_cell?(player_two_move, new_board)
-                new_board[player_two_move] = player_two_symbol
+            if Logic.valid_cell?(player_two_move, board) && Logic.empty_cell?(player_two_move, board)
+                board[player_two_move] = player_two_symbol
                 turn_over = true
             else
                 turn_over = false
@@ -77,10 +124,14 @@ while start_over == true
         end
 
         puts ""
-        Board.display_board(new_board)
+        puts "#{board[0]} | #{board[1]} | #{board[2]}"
+        puts '---------'
+        puts "#{board[3]} | #{board[4]} | #{board[5]}"
+        puts '---------'
+        puts "#{board[6]} | #{board[7]} | #{board[8]}"
 
         
-        if Logic.game_defined?(new_board)
+        if Logic.game_defined?(board)
             playing = false
             break
         end

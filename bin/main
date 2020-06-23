@@ -142,12 +142,12 @@ while start_over == true
     puts '---------'
     puts "#{board[6]} | #{board[7]} | #{board[8]}"
 
-    if Logic.wining_row?(board) ||
-      Logic.wining_column?(board) ||
-      Logic.wining_diagonal?(board)
-     playing = false
-     break
-    end
+    next unless Logic.wining_row?(board) ||
+                Logic.wining_column?(board) ||
+                Logic.wining_diagonal?(board)
+
+    playing = false
+    break
 
   end
 

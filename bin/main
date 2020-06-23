@@ -71,7 +71,7 @@ while start_over == true
   puts "#{board[6]} | #{board[7]} | #{board[8]}"
 
   def self.player_move(player_selection)
-    player_selection = '' # rubocop:todo Lint/ShadowedArgument
+    player_selection = ''
     while player_selection.empty?
       player_selection = gets.chomp
       if player_selection =~ /[1-9]/
@@ -94,7 +94,6 @@ while start_over == true
     while turn_over == false
       puts "\n#{player_one} write a valid move and press enter:"
       player_one_move = player_move(player_one)
-      # rubocop:todo Metrics/BlockNesting
       if Logic.valid_cell?(player_one_move, board) && Logic.empty_cell?(player_one_move, board)
         board[player_one_move] = player_one_symbol
         turn_over = true
@@ -102,7 +101,6 @@ while start_over == true
         player_one_move = ''
         turn_over = false
       end
-      # rubocop:enable Metrics/BlockNesting
     end
 
     puts ''
@@ -129,14 +127,12 @@ while start_over == true
     while turn_over == false
       puts "\n#{player_two} write a valid move and press enter:"
       player_two_move = player_move(player_two)
-      # rubocop:todo Metrics/BlockNesting
       if Logic.valid_cell?(player_two_move, board) && Logic.empty_cell?(player_two_move, board)
         board[player_two_move] = player_two_symbol
         turn_over = true
       else
         turn_over = false
       end
-      # rubocop:enable Metrics/BlockNesting
     end
 
     puts ''
@@ -169,7 +165,7 @@ while start_over == true
   while start_again != 'yes' || start_again != 'no'
     puts "\nDo you want to play again? (yes/no)"
     start_again = gets.chomp
-    if start_again == 'yes' # rubocop:todo Style/GuardClause
+    if start_again == 'yes'
       break
     elsif start_again == 'no'
       puts "\nThanks for playing, see you!"

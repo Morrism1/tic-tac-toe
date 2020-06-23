@@ -18,15 +18,28 @@ class Logic
     end
   end
 
-  def self.game_defined?(board)
-    # rubocop:disable Metrics/PerceivedComplexity,Metrics/CyclomaticComplexity
+  def self.wining_row?(board)
     if board[0] == board[1] && board[1] == board[2] ||
        board[3] == board[4] && board[4] == board[5] ||
-       board[6] == board[7] && board[7] == board[8] ||
-       board[0] == board[3] && board[3] == board[6] ||
+       board[6] == board[7] && board[7] == board[8] 
+      true
+    else
+      false
+    end
+  end
+
+  def self.wining_column?(board)
+    if board[0] == board[3] && board[3] == board[6] ||
        board[1] == board[4] && board[4] == board[7] ||
-       board[2] == board[5] && board[5] == board[8] ||
-       board[0] == board[4] && board[4] == board[8] ||
+       board[2] == board[5] && board[5] == board[8] 
+      true
+    else
+      false
+    end
+  end
+
+  def self.wining_diagonal?(board)
+    if board[0] == board[4] && board[4] == board[8] ||
        board[2] == board[4] && board[4] == board[6]
       true
     else

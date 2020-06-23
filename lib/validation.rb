@@ -39,7 +39,7 @@ class Logic
     false
   end
   # rubocop:enable Metrics/CyclomaticComplexity
-  
+
   def self.wining_diagonal?(board)
     if board[0] == board[4] && board[4] == board[8] ||
        board[2] == board[4] && board[4] == board[6]

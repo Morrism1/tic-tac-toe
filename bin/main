@@ -1,56 +1,176 @@
 #!/usr/bin/env ruby
+require_relative '../lib/validation.rb'
 
-puts '1 | 2 | 3'
-puts '---------'
-puts '4 | 5 | 6'
-puts '---------'
-puts '7 | 8 | 9'
+puts 'Welcome to the Tic-Tac-Toe game'
 
-puts "\nPlayer 1 (X), insert your name:"
+puts "\nPlayer one enter your name and press enter:"
+
 player_one = gets.chomp
+while player_one.empty?
+  puts 'Player one please enter your name:'
+  player_one = gets.chomp
+end
 
-puts "\nPlayer 2 (O), insert your name:"
+puts ''
+
+player_one_symbol = ''
+while player_one_symbol.empty?
+  puts "#{player_one} write a valid (a-z) mark and press enter:"
+  player_one_symbol = gets.chomp
+  if player_one_symbol =~ /[a-z]/
+    if player_one_symbol.length > 1
+      player_one_symbol = ''
+    else
+      player_one_symbol
+    end
+  else
+    player_one_symbol = ''
+  end
+end
+
+puts "\nPlayer two enter your name:"
+
 player_two = gets.chomp
+while player_two.empty?
+  puts 'Player two please enter your name:'
+  player_two = gets.chomp
+end
 
-puts "\n#{player_one} make your move"
-gets.chomp
+puts ''
 
-game_on = false
-# initial instructions for player
-player_move = 0
-while game_on == false
-  # telling player 1 to play
-  if player_move.odd?
-    player_move = gets.chomp
-    player_move.to_s
-    # check the move is valid
-    # if the move was valid the board will be changed
-    # Display board with updated data
+player_two_symbol = ''
+while player_two_symbol.empty?
+  puts "#{player_two} write a valid (a-z) mark and press enter:"
+  player_two_symbol = gets.chomp
+  if player_two_symbol =~ /[a-z]/
+    if player_two_symbol.length > 1
+      player_two_symbol = ''
+    elsif player_two_symbol == player_one_symbol
+      player_two_symbol = ''
+    else
+      player_two_symbol
+    end
+  else
+    player_two_symbol = ''
+  end
+end
 
-    # tell player 2 to play
-  elsif player_move.even?
-    puts "#{player_two} make a move"
-    player_move = gets.chomp
-    player_move.to_s
-    # check the move is valid
-    # if the move was valid the board will be changed
-    # Display board with updated data
+puts ''
+
+start_over = true
+while start_over == true
+  playing = true
+  board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  turn_counter = 0
+
+  puts ''
+  puts "#{board[0]} | #{board[1]} | #{board[2]}"
+  puts '---------'
+  puts "#{board[3]} | #{board[4]} | #{board[5]}"
+  puts '---------'
+  puts "#{board[6]} | #{board[7]} | #{board[8]}"
+
+  def self.player_move(player_selection)
+    player_selection = ''
+    while player_selection.empty?
+      player_selection = gets.chomp
+      if player_selection =~ /[1-9]/
+        player_selection
+      else
+        puts 'please select a valid move!'
+        player_selection = ''
+      end
+    end
+    player_selection_to_i = player_selection.to_i
+    player_move = player_selection_to_i - 1
+    player_move
+  end
+
+  while playing == true
+
+    turn_over = false
+    turn_counter += 1
+
+    while turn_over == false
+      puts "\n#{player_one} write a valid move and press enter:"
+      player_one_move = player_move(player_one)
+      if Logic.valid_cell?(player_one_move, board) && Logic.empty_cell?(player_one_move, board)
+        board[player_one_move] = player_one_symbol
+        turn_over = true
+      else
+        player_one_move = ''
+        turn_over = false
+      end
+    end
+
+    puts ''
+    puts "#{board[0]} | #{board[1]} | #{board[2]}"
+    puts '---------'
+    puts "#{board[3]} | #{board[4]} | #{board[5]}"
+    puts '---------'
+    puts "#{board[6]} | #{board[7]} | #{board[8]}"
+
+    if turn_counter == 9
+      playing = false
+      break
+    end
+
+    if Logic.wining_row?(board) ||
+       Logic.wining_column?(board) ||
+       Logic.wining_diagonal?(board)
+      playing = false
+      break
+    end
+
+    turn_over = false
+    turn_counter += 1
+    while turn_over == false
+      puts "\n#{player_two} write a valid move and press enter:"
+      player_two_move = player_move(player_two)
+      if Logic.valid_cell?(player_two_move, board) && Logic.empty_cell?(player_two_move, board)
+        board[player_two_move] = player_two_symbol
+        turn_over = true
+      else
+        turn_over = false
+      end
+    end
+
+    puts ''
+    puts "#{board[0]} | #{board[1]} | #{board[2]}"
+    puts '---------'
+    puts "#{board[3]} | #{board[4]} | #{board[5]}"
+    puts '---------'
+    puts "#{board[6]} | #{board[7]} | #{board[8]}"
+
+    next unless Logic.wining_row?(board) ||
+                Logic.wining_column?(board) ||
+                Logic.wining_diagonal?(board)
+
+    playing = false
+    break
 
   end
 
+  puts ''
 
-  game_on = true
-  #if the board has ben filled up and there is no match for a winning combination
-  #if any player matches a wining combination
+  if turn_counter == 9
+    puts "It's a draw!"
+  elsif turn_counter.odd?
+    puts "Congratulations #{player_one} you won!"
+  elsif turn_counter.even?
+    puts "Congratulations #{player_two} you won!"
+  end
 
-  # to stop the loop the game will be true to get the winner or a tie
-
-  puts ' It was a tie'
-  puts "#{player_one} Won"
-  puts "#{player_two} Won"
-
-  player_move = + 1
-
+  start_again = ''
+  while start_again != 'yes' || start_again != 'no'
+    puts "\nDo you want to play again? (yes/no)"
+    start_again = gets.chomp
+    if start_again == 'yes'
+      break
+    elsif start_again == 'no'
+      puts "\nThanks for playing, see you!"
+      start_over = false
+      return start_over
+    end
+  end
 end
-
-puts "\nCongrats #{player_two} you won!"

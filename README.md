@@ -15,7 +15,7 @@ The game takes place one turn at the time alternating between the two players, s
 
 ## Usage
 *Needs ruby 2.6.5 installed*
-```Git
+
 git clone https://github.com/Morrism1/tic-tac-toe.git
 cd tic-tac-toe
 git checkout development

@@ -57,4 +57,17 @@ RSpec.describe Logic do
         end
     end
 
+    describe 'wining_diagonal' do
+        it 'return true if diagonal cells are winning' do
+            board = ['a', 2, 3, 'b', 'a', 6, 'b', 8, 'a']
+            expect(Logic.wining_diagonal?(board)).to be(true)
+        end
+    end
+
+    describe 'wining_diagonal' do
+        it 'return false if any diagonal cell is not winning' do
+            board = ['a', 2, 3, 'b', 'a', 6, 'b', 8, 'b']
+            expect(Logic.wining_diagonal?(board)).to be(false)
+        end
+    end
 end

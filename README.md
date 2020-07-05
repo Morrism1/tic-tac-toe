@@ -1,29 +1,26 @@
 # Basic CLI program
-
 # Tic-Tac-Toe game
 
-## Description
 
+## Description
 In this project, we created the world wide tic-tac-toe game using the command line interface, it allows to human players to play as many rounds as wanted.
 
 ## Instructions
-
 Tic-Tac-Toe playing board is a 3x3 grid and consist in conecting three of your marks, to win at this game these marks must be in the same column, row or diagonal.
 The game takes place one turn at the time alternating between the two players, so you have to find the way to set the perfect trap but always taking care of not being the victim of your rival.
 
-## Built With
 
+## Built With
 - Ruby
-- Rspec for Testing
 
 ## Usage
-
 *Needs ruby 2.6.5 installed*
 
-git clone [this repo](https://github.com/Morrism1/tic-tac-toe.git)
+git clone https://github.com/Morrism1/tic-tac-toe.git
 cd tic-tac-toe
 git checkout development
 ruby main
+
 
 ## Demo
 
@@ -40,7 +37,6 @@ ruby main
 4. To run tests run `rspec` in the terminal
 
 5. Tests that are passing will be displayed along with those failing.
-
 
 ## Authors
 

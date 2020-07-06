@@ -26,6 +26,17 @@ ruby main
 
 [live version](https://repl.it/@tacodtripe/tic-tac-toe)
 
+## Testing
+
+1. Clone the repository to your local machine.
+
+2. `cd` inside the folder
+
+3. Go to terminal and Install Rspec by `gem install rspec`
+
+4. To run tests run `rspec` in the terminal
+
+5. Tests that are passing will be displayed along with those failing.
 
 ## Authors
 

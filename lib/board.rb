@@ -5,7 +5,7 @@ class Board
     @board = board
   end
 
-  def self.display_board
+  def display_board(_choice = nil, _current_player = nil, _chip = nil)
     <<~MLS
        #{@board[0]} | #{@board[1]} | #{@board[2]}
       ---+---+---

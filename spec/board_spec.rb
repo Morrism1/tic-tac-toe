@@ -4,10 +4,6 @@ require './lib/board.rb'
 RSpec.describe Board do
   describe 'Functionality of #initialize' do
     let(:board) { Board.new([1, 2, 3, 4, 5, 6, 7, 8, 9]) }
-    let(:player_one) { Board.new }
-    let(:player_two) { Board.new }
-    # let(:board) { Board.new(:player_one, :player_two, :board) }
-    let(:current_player) { :player_one }
 
     describe '#initialize' do
       it 'should initialize as an instance of Board class' do
